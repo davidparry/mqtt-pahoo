@@ -1,0 +1,46 @@
+plugins {
+    // Provide convenience executables for trying out the examples.
+    id 'application'
+    id 'idea'
+    id 'java'
+    id 'groovy'
+}
+
+repositories {
+    maven { // The google mirror is less flaky than mavenCentral()
+        url "https://maven-central.storage-download.googleapis.com/repos/central/data/"
+    }
+    mavenLocal()
+    mavenCentral()
+}
+
+description = "Paho MQTT Example"
+group mavenGroup
+version projVersionNumber
+
+sourceCompatibility = 8
+
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.12'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
+    implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.28'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+
+
+}
+
+
+startScripts.enabled = false
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}

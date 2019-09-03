@@ -3,7 +3,6 @@ plugins {
     id 'application'
     id 'idea'
     id 'java'
-    id 'groovy'
 }
 
 repositories {
@@ -28,8 +27,11 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
     implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.28'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
+}
 
-
+task mqtt(type: JavaExec , dependsOn: build ) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "com.firstaware.paho.PahoService"
 }
 
 

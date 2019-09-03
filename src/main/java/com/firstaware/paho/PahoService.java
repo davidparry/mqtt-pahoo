@@ -38,7 +38,6 @@ public class PahoService {
         PublisherImpl publisher = new PublisherImpl(server, topic, options);
         ListenerImpl listener = new ListenerImpl(server, options);
         executorService.submit(listener);
-        sleep(50);
         executorService.submit(publisher);
         try {
             executorService.awaitTermination(5, TimeUnit.MINUTES);

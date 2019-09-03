@@ -26,11 +26,12 @@ public class ListenerImpl implements Callable<Integer> {
     public Integer call()  {
         IMqttClient listener = null;
         try {
+            System.out.println("Subscribe to a topic app/rx");
             String publisherId = UUID.randomUUID().toString();
             listener = new MqttClient(mqttUri, publisherId);
             listener.connect(options);
             LOG.debug("Are we connected for listening {}", listener.isConnected());
-            System.out.println("Subscribe to a topic app/rx");
+            System.out.println("Connected to server with MqttClient");
             CountDownLatch receivedSignal = new CountDownLatch(1);
             listener.subscribe("app/rx", (topic, msg) -> {
                 byte[] payload = msg.getPayload();
@@ -41,7 +42,7 @@ public class ListenerImpl implements Callable<Integer> {
             });
             // put in to run tests for you when no logger is setup
             System.out.println("Waiting for a message on topic ");
-            receivedSignal.await(5, TimeUnit.SECONDS);
+            receivedSignal.await(30, TimeUnit.SECONDS);
         } catch (MqttException | InterruptedException e) {
             LOG.error("error contacting or waiting for a signal ", e);
             // put in to run tests for you when no logger is setup

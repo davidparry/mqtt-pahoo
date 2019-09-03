@@ -1,4 +1,4 @@
 # paho service
 
-java 12 install
-run gradlew build test will run to show failure 
+1. java 12 install
+2. run ./gradlew clean mqtt 

@@ -28,6 +28,7 @@ public class PublisherImpl implements Callable<Integer> {
             publisher = new MqttClient(this.mqttUri, publisherId);
             publisher.connect(options);
             LOG.debug("Are we connected as client {}", publisher.isConnected());
+            System.out.println("Are we connected as a client  " + publisher.isConnected() );
             call(publisher, topic);
             System.out.println("Published completed for topic " + topic);
         } catch (MqttException e) {
